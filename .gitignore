@@ -15,6 +15,7 @@ lib
 deps
 tts
 www
+custom_components
 .DS_Store
 .AppleDouble
 .LSOverride

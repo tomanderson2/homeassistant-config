@@ -1,0 +1,252 @@
+homeassistant:
+  name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
+  unit_system: metric
+  time_zone: Europe/London
+  customize: !include customize.yaml
+
+camera:
+  - platform: ffmpeg
+    name: Conservatory Camera
+    input: !secret con_cam_stream
+  - platform: yi
+    name: Driveway Camera
+    host: !secret ip_yi_driveway
+    password: !secret yi_password
+
+#android_ip_webcam:
+#  - host: !secret android_cam
+#    name: Driveway Camera
+#    port: 8080
+#    switches:
+#    - ffc
+#    - night_vision
+
+climate:
+  platform: hive
+
+config:
+
+device_tracker:
+  - platform: linksys_smart
+    host: !secret ip_router
+    interval_seconds: 30
+    consider_home: 180
+    track_new_devices: no
+  - platform: owntracks
+    max_gps_accuracy: 200
+    waypoints: True
+
+discovery:
+
+#ffmpeg:
+
+frontend:
+
+google_assistant:
+  project_id: !secret ga_project_id
+  client_id: !secret ga_client_id
+  access_token: !secret ga_access_token
+  agent_user_id: !secret ga_agent_user_id
+  api_key: !secret ga_api_key
+  exposed_domains:
+    - switch
+    - light
+    - group
+
+history:
+
+hive:
+  username: !secret hive_user
+  password: !secret hive_pass
+  scan_interval: 1
+
+http:
+  base_url: !secret base_url
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  api_password: !secret http_password
+  ip_ban_enabled: True
+  login_attempts_threshold: 5
+  trusted_networks:
+   - 127.0.0.1
+
+ifttt:
+  key: !secret ifttt_key
+
+input_select:
+  tom_status_dropdown:
+    name: Tom
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
+    initial: Home
+  hannah_status_dropdown:
+    name: Hannah
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
+    initial: Home
+
+light:
+  platform: rfxtrx
+  automatic_add: False
+  devices:
+      0a14000000020101010080:
+        name: Living Room
+      0a14000000020201010080:
+        name: Dining Room
+      0a140010f46e610d010070:
+        name: Landing
+      0a140000f46e610e010070:
+        name: Bathroom
+      0a140006f472210d010070:
+        name: Kitchen
+      0a14000000030101010080:
+        name: Hall
+
+logbook:
+
+# Set log level
+logger:
+  default: warning
+  #logs:
+  #  homeassistant.components.rfxtrx: info
+
+map:
+
+media_player:
+  - platform: webostv
+    host: !secret ip_tv
+    name: Living Room TV
+    timeout: 5
+    icon: mdi:television
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: !secret mac_tv
+    customize:
+      sources:
+        - BBC iPlayer
+        - Chromecast
+        - Component
+        - Fire TV
+        - LiveTV
+        - Soundbar
+        - YouTube
+  - platform: kodi
+    host: !secret ip_kodi
+
+mqtt:
+  broker: localhost
+  port: 1883
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+  keepalive: 60
+
+
+
+notify:
+  - name: tom
+    platform: html5
+    gcm_api_key: !secret gcm_api_key
+    gcm_sender_id: !secret gcm_sender_id
+
+rfxtrx:
+  device: /dev/ttyUSB0
+  dummy: False
+
+scene:
+  - name: Bathroom normal
+    entities:
+      light.bathroom:
+        state: on
+        brightness: 255
+  - name: Bathroom dim
+    entities:
+      light.bathroom:
+        state: on
+        brightness: 50
+
+sensor:
+  - platform: template
+    sensors:
+      tom_status:
+        value_template: '{{ states.input_select.tom_status_dropdown.state }}'
+        friendly_name: 'Tom'
+        entity_id: input_select.tom_status_dropdown
+      hannah_status:
+        value_template: '{{ states.input_select.hannah_status_dropdown.state }}'
+        friendly_name: 'Hannah'
+        entity_id: input_select.hannah_status_dropdown
+
+sun:
+
+switch:
+  - platform: wake_on_lan
+    name: Computer
+    mac_address: !secret mac_computer
+    host: !secret ip_pc
+    turn_off:
+        service: hassio.addon_stdin
+        data:
+            addon: core_rpc_shutdown
+            input: windows_box
+  #- platform: tplink
+  #  host: !secret tplink_plug_ip
+  #  name: Christmas Tree
+  - platform: rfxtrx
+    automatic_add: False
+    devices:
+      0a140009f472210e010070:
+        name: Kitchen units
+      0a140008f54bd20d010070:
+        name: Conservatory
+      0a14000800020301010070:
+        name: House Phone
+      0a14000800020401010070:
+        name: Internet Switch
+      0a14000800020501010070:
+        name: TV wall
+      0a14000800020601010070:
+        name: Games Consoles
+      0a14000801010201010070:
+        name: Hannahs Lamp
+      0a1400090A010001010070:
+        name: Hannah's Switch
+      0a14000801010101010070:
+        name: Toms Lamp
+      0a14000ef4eb2403010050:
+        name: Toms Switch
+      0a1400090A000001010070:
+        name: Evlyns Left Switch
+      0a1400090A000101010070:
+        name: Evlyns Right Switch
+      07160200003e3860:
+        name: Doorbell
+        fire_event: True
+
+tts:
+  - platform: google
+
+updater:
+  include_used_components: true
+
+weather:
+  - platform: openweathermap
+    api_key: !secret openweather_key
+
+###########INCLUDES#####
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+zone: !include_dir_list zones/

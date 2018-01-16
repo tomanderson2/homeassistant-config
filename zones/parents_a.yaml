@@ -1,0 +1,5 @@
+name: !secret para_name
+latitude: !secret para_latitude
+longitude: !secret para_longitude
+radius: 150
+icon: mdi:account-multiple

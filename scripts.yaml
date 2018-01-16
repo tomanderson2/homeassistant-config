@@ -1,0 +1,37 @@
+############################################################
+#
+# Home Assistant Scripts
+#
+############################################################
+
+#Turn off devices
+good_night:
+  sequence:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.downstairs
+    - service: switch.turn_off
+      data:
+        entity_id: group.lamps
+    - service: switch.turn_off
+      data:
+        entity_id: input_boolean.ifttt_office_lamp
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.living_room_home
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.living_room
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.bed_room
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.outside
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.tv_ua55ju6400
+    - service: remote.turn_off
+      data:
+        entity_id: remote.living_room
+

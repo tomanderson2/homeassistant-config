@@ -1,0 +1,5 @@
+name: !secret parc_name
+latitude: !secret parc_latitude
+longitude: !secret parc_longitude
+radius: 150
+icon: mdi:account-multiple

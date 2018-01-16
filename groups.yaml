@@ -1,0 +1,117 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - light.bathroom
+    - light.landing
+    - group.evlyns_room
+    - group.our_bedroom
+    - group.other
+    - group.kitchen_lights
+    - group.front_room
+    - group.the_computer
+    - group.people_status
+    - group.weather
+    - climate.heating
+
+bedrooms:
+  view: yes
+  icon: mdi:hotel
+  entities:
+    - group.evlyns_room
+    - group.our_bedroom
+
+upstairs:
+  view: yes
+  icon: mdi:stairs
+  entities:
+    - light.bathroom
+    - light.landing
+
+Downstairs:
+  view: yes
+  icon: mdi:sofa
+  entities:
+    - group.other
+    - group.kitchen_lights
+    - group.front_room
+    - group.computer
+
+evlyns_room:
+  name: Evlyns Room
+    - light.evlyns_light
+    - switch.evlyns_left_switch
+    - switch.evlyns_right_switch
+
+Our Bedroom:
+  entities:
+    - switch.toms_lamp
+    - switch.hannahs_lamp
+    - switch.hannahs_switch
+    - switch.toms_switch
+
+Front Room:
+  entities:
+    - light.dining_room
+    - light.living_room
+    - switch.cupboard_lights
+    - switch.living_room_plug
+    - switch.christmas_tree
+    - switch.games_consoles
+    - switch.house_phone
+    - switch.internet_switch
+    - switch.tv_wall
+
+kitchen lights:
+    - switch.kitchen_units
+    - light.kitchen
+
+Front room lights:
+  entities:
+    - light.dining_room
+    - light.living_room
+
+Other:
+  entities:
+    - light.hall
+    - switch.conservatory
+
+The Computer:
+  entities:
+    - switch.computer
+
+Family:
+    - device_tracker.tom_gs6
+    - device_tracker.hannah_gs7
+
+People status:
+  entities:
+    - sensor.tom_status
+    - sensor.hannah_status
+
+Weather:
+  entities:
+    - sun.sun
+    - weather.openweathermap
+
+Media Players:
+  view: yes
+  icon: mdi:play-circle-outline
+  entities:
+    - media_player.downstairs
+    - media_player.kitchen 
+    - media_player.kitchen_home
+    - media_player.kodi 
+    - media_player.living_room_chromecast
+    - media_player.living_room_home
+    - media_player.living_room_tv
+    - media_player.soundbar
+
+Security:
+  view: yes
+  icon: mdi:security
+  entities:
+    - camera.conservatory_camera
+    - camera.driveway_camera
+    - binary_sensor.front_door
+    - binary_sensor.conservatory

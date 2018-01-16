@@ -4,24 +4,21 @@ default_view:
   entities:
     - light.bathroom
     - light.landing
-    - group.evlyns_room
     - group.our_bedroom
-    - group.other
     - group.kitchen_lights
     - group.front_room
     - group.the_computer
-    - group.people_status
     - group.weather
     - climate.heating
 
-bedrooms:
+Bedrooms:
   view: yes
   icon: mdi:hotel
   entities:
     - group.evlyns_room
     - group.our_bedroom
 
-upstairs:
+Upstairs:
   view: yes
   icon: mdi:stairs
   entities:
@@ -36,9 +33,10 @@ Downstairs:
     - group.kitchen_lights
     - group.front_room
     - group.computer
+    - group.downstairs_group
 
-evlyns_room:
-  name: Evlyns Room
+Evlyns Room:
+  entities:
     - light.evlyns_light
     - switch.evlyns_left_switch
     - switch.evlyns_right_switch
@@ -64,14 +62,15 @@ Front Room:
 
 kitchen lights:
     - switch.kitchen_units
-    - light.kitchen
+    - light.main_kitchen
 
 Front room lights:
   entities:
     - light.dining_room
     - light.living_room
 
-Other:
+downstairs_group:
+  name: Downstairs
   entities:
     - light.hall
     - switch.conservatory
@@ -80,14 +79,10 @@ The Computer:
   entities:
     - switch.computer
 
-Family:
-    - device_tracker.tom_gs6
-    - device_tracker.hannah_gs7
-
 People status:
   entities:
-    - sensor.tom_status
-    - sensor.hannah_status
+    - sensor.tom
+    - sensor.hannah
 
 Weather:
   entities:
@@ -98,14 +93,25 @@ Media Players:
   view: yes
   icon: mdi:play-circle-outline
   entities:
+    - media_player.kodi 
+    - media_player.living_room_tv
+    - media_player.soundbar
+    - group.google_cast
+
+Google Cast:
+  icon: mdi:google-assistant
+  entities:
     - media_player.downstairs
     - media_player.kitchen 
     - media_player.kitchen_home
-    - media_player.kodi 
     - media_player.living_room_chromecast
     - media_player.living_room_home
-    - media_player.living_room_tv
-    - media_player.soundbar
+
+Door Sensors:
+  icon: mdi:security
+  entities:
+    - binary_sensor.front_door
+    - binary_sensor.conservatory
 
 Security:
   view: yes
@@ -113,5 +119,12 @@ Security:
   entities:
     - camera.conservatory_camera
     - camera.driveway_camera
-    - binary_sensor.front_door
-    - binary_sensor.conservatory
+    - group.door_sensors
+
+Location:
+  view: yes
+  icon: mdi:map
+  entities:
+    - group.people_status
+    - camera.tom
+    - camera.hannah

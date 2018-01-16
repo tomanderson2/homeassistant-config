@@ -6,12 +6,6 @@ sensor.hannah_status:
   entity_picture: /local/hannah.jpeg
 climate.heating:
   entity_picture: /local/hive.png
-input_select.hannah_status_dropdown:
-  hidden: true
-input_select.tom_status_dropdown:
-  hidden: true
-group.family:
-  hidden: true
 light.warm_white_light_1:
   hidden: true
 automation.dim_bathroom_lights_when_its_late:
@@ -20,19 +14,14 @@ media_player.living_room_chromecast:
   hidden: true
 switch.kitchen_units:
   icon: mdi:led-strip
-  google_assistant_type: light
 switch.conservatory:
   icon: mdi:spotlight
-  google_assistant_type: light
 switch.cupboard_lights:
   icon: mdi:led-strip
-  google_assistant_type: light
 switch.toms_lamp:
   icon: mdi:lamp
-  google_assistant_type: light
 switch.hannahs_lamp:
   icon: mdi:lamp
-  google_assistant_type: light
 light.dining_room:
   icon: mdi:spotlight-beam
 light.living_room:

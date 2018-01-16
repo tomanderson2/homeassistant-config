@@ -15,7 +15,14 @@ camera:
     name: Driveway Camera
     host: !secret ip_yi_driveway
     password: !secret yi_password
-
+  - platform: generic
+    name: tom
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.hassio_tomphone.attributes.latitude }},{{ states.device_tracker.hassio_tomphone.attributes.longitude }}&zoom=15&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.device_tracker.hassio_tomphone.attributes.latitude }},{{ states.device_tracker.hassio_tomphone.attributes.longitude }}
+    limit_refetch_to_url_change: true
+  - platform: generic
+    name: hannah
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.hannah_gs7.attributes.latitude }},{{ states.device_tracker.hannah_gs7.attributes.longitude }}&zoom=16&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.device_tracker.hannah_gs7.attributes.latitude }},{{ states.device_tracker.hannah_gs7.attributes.longitude }}
+    limit_refetch_to_url_change: true
 #android_ip_webcam:
 #  - host: !secret android_cam
 #    name: Driveway Camera
@@ -55,6 +62,17 @@ google_assistant:
     - switch
     - light
     - group
+  entity_config:
+    switch.kitchen_units:
+      type: light
+    switch.conservatory:
+      type: light
+    switch.cupboard_lights:
+      type: light
+    switch.toms_lamp:
+      type: light
+    switch.hannahs_lamp:
+      type: light
 
 history:
 
@@ -76,26 +94,6 @@ http:
 ifttt:
   key: !secret ifttt_key
 
-input_select:
-  tom_status_dropdown:
-    name: Tom
-    options:
-      - Home
-      - Just Arrived
-      - Just Left
-      - Away
-      - Extended Away
-    initial: Home
-  hannah_status_dropdown:
-    name: Hannah
-    options:
-      - Home
-      - Just Arrived
-      - Just Left
-      - Away
-      - Extended Away
-    initial: Home
-
 light:
   platform: rfxtrx
   automatic_add: False
@@ -109,7 +107,7 @@ light:
       0a140000f46e610e010070:
         name: Bathroom
       0a140006f472210d010070:
-        name: Kitchen
+        name: Main Kitchen
       0a14000000030101010080:
         name: Hall
 
@@ -147,12 +145,10 @@ media_player:
 
 mqtt:
   broker: localhost
-  port: 1883
+  port: !secret mqtt_port
   username: !secret mqtt_user
   password: !secret mqtt_password
   keepalive: 60
-
-
 
 notify:
   - name: tom
@@ -177,16 +173,14 @@ scene:
         brightness: 50
 
 sensor:
-  - platform: template
-    sensors:
-      tom_status:
-        value_template: '{{ states.input_select.tom_status_dropdown.state }}'
-        friendly_name: 'Tom'
-        entity_id: input_select.tom_status_dropdown
-      hannah_status:
-        value_template: '{{ states.input_select.hannah_status_dropdown.state }}'
-        friendly_name: 'Hannah'
-        entity_id: input_select.hannah_status_dropdown
+  - platform: google_geocode
+    name: tom
+    origin: device_tracker.hassio_tomphone
+    options: street_number, street, city
+  - platform: google_geocode
+    name: hannah
+    origin: device_tracker.hannah_gs7
+    options: street_number, street, city
 
 sun:
 

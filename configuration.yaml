@@ -17,7 +17,7 @@ camera:
     password: !secret yi_password
   - platform: generic
     name: tom
-    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.hassio_tomphone.attributes.latitude }},{{ states.device_tracker.hassio_tomphone.attributes.longitude }}&zoom=15&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.device_tracker.hassio_tomphone.attributes.latitude }},{{ states.device_tracker.hassio_tomphone.attributes.longitude }}
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.hassio_tomphone.attributes.latitude }},{{ states.device_tracker.hassio_tomphone.attributes.longitude }}&zoom=16&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.device_tracker.hassio_tomphone.attributes.latitude }},{{ states.device_tracker.hassio_tomphone.attributes.longitude }}
     limit_refetch_to_url_change: true
   - platform: generic
     name: hannah
@@ -62,6 +62,7 @@ google_assistant:
     - switch
     - light
     - group
+    - script
   entity_config:
     switch.kitchen_units:
       type: light
@@ -73,6 +74,10 @@ google_assistant:
       type: light
     switch.hannahs_lamp:
       type: light
+    script.boost_hot_water:
+      name: Boost the hot water
+    script.boost_heating:
+      name: Boost the heating
 
 history:
 
@@ -177,10 +182,12 @@ sensor:
     name: tom
     origin: device_tracker.hassio_tomphone
     options: street_number, street, city
+    api_key: AIzaSyBW-6kd7kgFC5NmZ0pLAbg1Gjg2_2zkepg
   - platform: google_geocode
     name: hannah
     origin: device_tracker.hannah_gs7
     options: street_number, street, city
+    api_key: AIzaSyBW-6kd7kgFC5NmZ0pLAbg1Gjg2_2zkepg
 
 sun:
 
@@ -241,6 +248,8 @@ weather:
 ###########INCLUDES#####
 
 group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
+automation: !include_dir_merge_list automations
+script: !include_dir_merge_named scripts
 zone: !include_dir_list zones/
+input_boolean: !include_dir_merge_named input_boolean
+

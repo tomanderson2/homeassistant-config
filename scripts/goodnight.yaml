@@ -1,0 +1,35 @@
+############################################################
+#
+# Home Assistant Scripts
+#
+############################################################
+
+#Turn off devices
+goodnight:
+  sequence:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: 
+          - group.kitchen_lights
+          - group.computer
+          - switch.conservatory
+    - service: media_player.turn_off
+      entity_id:
+        - group.media_devices
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - switch.hannahs_lamp
+          - light.bathroom
+    - delay: 00:00:20
+    - service: homeassistant.turn_off
+      data:
+        entity_id: 
+          - group.front_room
+    - delay: 00:00:30
+    - service: homeassistant.turn_off
+      data:
+        entity_id: 
+          - light.hall
+          - switch.games_consoles
+          - switch.tv_wall

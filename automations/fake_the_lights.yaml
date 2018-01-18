@@ -1,0 +1,81 @@
+### Fake the lights
+
+#- alias: Lights on like we are home
+#  trigger:
+#    - platform: time
+#      at: '19:30:00'
+#  action:
+#    - service: light.turn_on
+#      entity_id: light.living_room
+
+#- alias: Lights off like we are home
+#  trigger:
+#    - platform: time
+#      at: '22:01:00'
+#  action:
+#    - service: light.turn_off
+#      entity_id: light.living_room
+
+#- alias: kitchen on like we are home
+#  trigger:
+#    - platform: time
+#      at: '21:45:00'
+#  action:
+#    - service: light.turn_on
+#      entity_id: light.kitchen
+
+#- alias: kitchen off like we are home
+#  trigger:
+#    - platform: time
+#      at: '22:00:00'
+#  action:
+#    - service: light.turn_off
+#      entity_id: light.kitchen
+
+#- alias: bathroom on like we are home
+#  trigger:
+#    - platform: time
+#      at: '22:00:00'
+#  action:
+#    - service: light.turn_on
+#      entity_id: light.bathroom
+
+#- alias: bathroom off like we are home
+#  trigger:
+#    - platform: time
+#      at: '22:07:00'
+#  action:
+#    - service: light.turn_off
+#      entity_id: light.bathroom
+
+#- alias: bedroom on like we are home
+#  trigger:
+#    - platform: time
+#      at: '22:02:00'
+#  action:
+#    - service: switch.turn_on
+#      entity_id: switch.hannahs_lamp
+
+#- alias: bedroom off like we are home
+#  trigger:
+#    - platform: time
+#      at: '22:10:00'
+#  action:
+#    - service: switch.turn_off
+#      entity_id: switch.hannahs_lamp
+
+
+#- alias: Front Door Opened
+#  hide_entity: True
+#  trigger:
+#    - platform: state
+#      entity_id: sensor.front_door
+#      from: 'CLOSED'
+#      to: 'OPEN'
+#    - platform: state
+#      entity_id: group.family
+#      to: 'not_home'
+#  action:
+#    - service: notify.tom
+#      data:
+#        message: "Front Door Opened"

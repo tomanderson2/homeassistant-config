@@ -1,0 +1,16 @@
+#### Bathroom light brightness so we don't disturb the kids when its late
+
+- alias: Boost the heating
+  trigger:
+    - platform: state
+      entity_id: input_boolean.heating
+      to: 'on'
+      from: 'off'
+  action:
+    - service: climate.set_aux_heat
+      data:
+        entity_id: climate.heating
+        aux_heat: true
+
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.heating

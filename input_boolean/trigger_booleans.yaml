@@ -1,0 +1,16 @@
+#triggers
+goodnight:
+  name: Good Night
+  initial: off
+
+goodmorning:
+  name: Good Morning
+  initial: off
+
+heating:
+  name: Heating Boost
+  initial: off
+
+hotwater:
+  name: Hot Water Boost
+  initial: off

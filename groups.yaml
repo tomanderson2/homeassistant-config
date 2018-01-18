@@ -10,6 +10,9 @@ default_view:
     - group.the_computer
     - group.weather
     - climate.heating
+    - input_boolean.heating
+    - input_boolean.goodnight
+    - input_boolean.hotwater
 
 Bedrooms:
   view: yes
@@ -29,15 +32,17 @@ Downstairs:
   view: yes
   icon: mdi:sofa
   entities:
-    - group.other
     - group.kitchen_lights
     - group.front_room
     - group.computer
     - group.downstairs_group
+    - switch.house_phone
+    - switch.internet_switch
 
 Evlyns Room:
   entities:
     - light.evlyns_light
+    - switch.evlyns_moon
     - switch.evlyns_left_switch
     - switch.evlyns_right_switch
 
@@ -53,11 +58,8 @@ Front Room:
     - light.dining_room
     - light.living_room
     - switch.cupboard_lights
-    - switch.living_room_plug
     - switch.christmas_tree
     - switch.games_consoles
-    - switch.house_phone
-    - switch.internet_switch
     - switch.tv_wall
 
 kitchen lights:
@@ -94,9 +96,13 @@ Media Players:
   icon: mdi:play-circle-outline
   entities:
     - media_player.kodi 
+    - group.media_devices
+    - group.google_cast
+
+Media Devices:
+  entities:
     - media_player.living_room_tv
     - media_player.soundbar
-    - group.google_cast
 
 Google Cast:
   icon: mdi:google-assistant

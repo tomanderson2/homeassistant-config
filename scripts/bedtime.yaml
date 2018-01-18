@@ -1,0 +1,23 @@
+############################################################
+#
+# Home Assistant Scripts
+#
+############################################################
+
+#Turn off devices
+bedtime:
+  sequence:
+    - service: tts.google_say
+      data:
+        entity_id:
+          - media_player.living_room_home
+        message: "Good night Olivia and Evelyn. Sleep well!"
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.bathroom
+          - light.landing
+    - service: switch.turn_on
+      data:
+        entity_id:
+          - switch.evlyns_moon

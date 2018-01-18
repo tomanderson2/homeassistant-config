@@ -1,0 +1,12 @@
+############################################################
+#
+# Home Assistant Scripts - Boost hive hot water
+#
+############################################################
+
+boost_hot_water:
+  sequence:
+    - service: climate.set_aux_heat
+      data:
+        entity_id: climate.hot_water
+        state: 'on'

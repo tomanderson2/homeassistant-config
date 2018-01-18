@@ -1,0 +1,12 @@
+############################################################
+#
+# Home Assistant Scripts - Boost hive heating
+#
+############################################################
+
+boost_heating:
+  sequence:
+    - service: climate.set_aux_heat
+      data:
+        entity_id: climate.heating
+        state: 'on'

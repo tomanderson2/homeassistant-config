@@ -22,6 +22,8 @@ switch.toms_lamp:
   icon: mdi:lamp
 switch.hannahs_lamp:
   icon: mdi:lamp
+switch.evlyns_moon:
+  icon: mdi:weather-night
 light.dining_room:
   icon: mdi:spotlight-beam
 light.living_room:
@@ -36,3 +38,23 @@ media_player.kitchen_home:
   icon: mdi:google-home
 switch.computer:
   icon: mdi:desktop-tower
+media_player.kodi:
+  icon: mdi:kodi
+input_boolean.good_night:
+  friendly_name: Good Night
+input_boolean.good_morning:
+  friendly_name: Good Morning
+input_boolean.heating:
+  friendly_name: Boost the Heating
+switch.hannahs_switch:
+  icon: mdi:power-socket-uk
+switch.toms_switch:
+  icon: mdi:power-socket-uk
+switch.tv_wall:
+  icon: mdi:power-socket-uk
+switch.games_consoles:
+  icon: mdi:xbox-controller
+media_player.living_room_tv:
+  icon: mdi:television
+media_player.soundbar:
+  icon: mdi:speaker

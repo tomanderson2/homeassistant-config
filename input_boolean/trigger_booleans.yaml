@@ -3,6 +3,10 @@ goodnight:
   name: Good Night
   initial: off
 
+bedtime:
+  name: Bed Time
+  initial: off
+
 goodmorning:
   name: Good Morning
   initial: off

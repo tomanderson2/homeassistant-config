@@ -7,11 +7,25 @@
 #Turn off devices
 bedtime:
   sequence:
-    - service: tts.google_say
+    - service: media_player.volume_set
       data:
         entity_id:
           - media_player.living_room_home
-        message: "Good night Olivia and Evelyn. Sleep well!"
+        data_template:
+          volume_level: 0.5
+    - service: tts.google_say
+      entity_id: media_player.living_room_home
+      data_template:
+        message: >
+          '{{ [
+            "Good night Olivia and Evlyn. Sleep well!",
+            "Don't forget to brush your teeth girls, night", 
+            "Night night, sleep tight", 
+            "Sweet dreams Olivia and Evlyn",
+            "Nighty Night",
+            "Sleep well, see you in the morning",
+            "Mwah, love you both lots"
+            ] | random }}'
     - service: light.turn_on
       data:
         entity_id:
@@ -21,3 +35,10 @@ bedtime:
       data:
         entity_id:
           - switch.evlyns_moon
+          - switch.olivias_moon
+    - service: media_player.volume_set
+      entity_id: group.google_homes
+      data_template:
+        volume_level: 0.15
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.bedtime

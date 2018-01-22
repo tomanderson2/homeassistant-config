@@ -1,0 +1,15 @@
+
+- alias: Set Goggle Home Slider Position
+  trigger:
+    - platform: state
+      entity_id:
+        - media_player.kitchen_home
+        - media_player.living_room_home
+  condition:
+    - condition: template
+      value_template: "{{ not is_state_attr('media_player.kitchen_home', 'volume_level', states('input_number.google_home') | int / 100) }}"
+  action:
+    - service: input_number.set_value
+      entity_id: input_number.google_home
+      data_template:
+        value: "{{ trigger.to_state.attributes.volume_level | multiply(100) | int }}"

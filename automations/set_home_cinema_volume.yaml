@@ -1,0 +1,13 @@
+
+- alias: Set Home Cinema Main Volume
+  trigger:
+    - platform: state
+      entity_id: input_number.home_cinema_main
+  condition:
+    - condition: template
+      value_template: "{{ not is_state_attr('media_player.living_room_tv', 'volume_level', states('input_number.home_cinema_main') | int / 100) }}"
+  action:
+    - service: media_player.volume_set
+      entity_id: media_player.living_room_tv
+      data_template:
+        volume_level: "{{ states('input_number.home_cinema_main') | int / 100 }}"

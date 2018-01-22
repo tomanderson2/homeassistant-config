@@ -10,3 +10,9 @@ boost_hot_water:
       data:
         entity_id: climate.hot_water
         state: 'on'
+    - service: tts.google_say
+      entity_id: group.google_homes
+      data_template:
+        message: "Boosting the hot water for 30 minutes"
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.hotwater

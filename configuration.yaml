@@ -62,7 +62,6 @@ google_assistant:
     - switch
     - light
     - group
-    - script
   entity_config:
     switch.kitchen_units:
       type: light
@@ -74,10 +73,6 @@ google_assistant:
       type: light
     switch.hannahs_lamp:
       type: light
-    script.boost_hot_water:
-      name: Boost the hot water
-    script.boost_heating:
-      name: Boost the heating
 
 history:
 
@@ -98,6 +93,21 @@ http:
 
 ifttt:
   key: !secret ifttt_key
+
+input_number:
+  google_home:
+    name: Goggle Home Volume
+    initial: 40
+    min: 0
+    max: 100
+    step: 1
+    
+  home_cinema_main:
+    name: Cinema Volume
+    initial: 40
+    min: 0
+    max: 100
+    step: 1
 
 light:
   platform: rfxtrx
@@ -201,9 +211,9 @@ switch:
         data:
             addon: core_rpc_shutdown
             input: windows_box
-  #- platform: tplink
-  #  host: !secret tplink_plug_ip
-  #  name: Christmas Tree
+  - platform: tplink
+    host: !secret tplink_plug_ip
+    name: Olivias Moon
   - platform: rfxtrx
     automatic_add: False
     devices:
@@ -234,6 +244,58 @@ switch:
       07160200003e3860:
         name: Doorbell
         fire_event: True
+  - platform: template
+    switches:
+      bedtime:
+        value_template: "off"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.bedtime
+        turn_off:
+          service: input_boolean.turn_off
+          data:
+            entity_id: input_boolean.bedtime
+      goodnight:
+        value_template: "off"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.goodnight
+        turn_off:
+          service: input_boolean.turn_off
+          data:
+            entity_id: input_boolean.goodnight
+      goodmorning:
+        value_template: "off"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.goodmorning
+        turn_off:
+          service: input_boolean.turn_off
+          data:
+            entity_id: input_boolean.goodmorning
+      hotwater:
+        value_template: "off"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.boost_hot_water
+        turn_off:
+          service: input_boolean.turn_off
+          data:
+            entity_id: input_boolean.hotwater
+      heating:
+        value_template: "off"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.boost_heating
+        turn_off:
+          service: input_boolean.turn_off
+          data:
+            entity_id: input_boolean.heating
 
 tts:
   - platform: google

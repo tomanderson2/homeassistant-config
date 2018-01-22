@@ -24,6 +24,8 @@ switch.hannahs_lamp:
   icon: mdi:lamp
 switch.evlyns_moon:
   icon: mdi:weather-night
+switch.olivias_moon:
+  icon: mdi:weather-night
 light.dining_room:
   icon: mdi:spotlight-beam
 light.living_room:

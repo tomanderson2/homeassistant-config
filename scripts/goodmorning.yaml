@@ -13,16 +13,16 @@ goodmorning:
     - service: media_player.volume_set
       entity_id: media_player.kitchen_home
       data_template:
-        volume_level: 0.5
+        volume_level: 0.6
     - service: switch.turn_off
       data:
         entity_id:
           - switch.evlyns_moon
           - switch.olivias_moon
-    - delay: 00:00:20
+    - delay: 00:01:00
     - service: media_player.volume_set
       entity_id: media_player.living_room_home
       data_template:
-        volume_level: 0.5
+        volume_level: 0.6
     - service: input_boolean.turn_off
       entity_id: input_boolean.goodmorning

@@ -10,9 +10,9 @@ default_view:
     - group.the_computer
     - group.weather
     - climate.heating
-    - input_boolean.heating
-    - input_boolean.goodnight
-    - input_boolean.hotwater
+    - switch.heating
+    - switch.hotwater
+    - group.people_status
 
 Bedrooms:
   view: yes
@@ -84,8 +84,8 @@ The Computer:
 
 People status:
   entities:
-    - sensor.tom
     - sensor.hannah
+    - sensor.tom
 
 Weather:
   entities:
@@ -96,7 +96,6 @@ Media Players:
   view: yes
   icon: mdi:play-circle-outline
   entities:
-    - group.volume_control
     - media_player.kodi 
     - group.media_devices
     - group.google_cast
@@ -105,11 +104,6 @@ Media Devices:
   entities:
     - media_player.living_room_tv
     - media_player.soundbar
-
-Volume Control:
-  entities:
-    - input_number.google_home
-    - input_number.home_cinema_main
 
 Google Cast:
   icon: mdi:google-assistant
@@ -138,11 +132,3 @@ Security:
     - camera.conservatory_camera
     - camera.driveway_camera
     - group.door_sensors
-
-Location:
-  view: yes
-  icon: mdi:map
-  entities:
-    - group.people_status
-    - camera.tom
-    - camera.hannah

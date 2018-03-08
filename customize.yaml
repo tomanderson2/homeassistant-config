@@ -1,17 +1,9 @@
-media_player.htnt5_d605c71:
-  hidden: true
-sensor.tom_status:
+sensor.tom:
   entity_picture: /local/tom.jpeg
-sensor.hannah_status:
+sensor.hannah:
   entity_picture: /local/hannah.jpeg
 climate.heating:
   entity_picture: /local/hive.png
-light.warm_white_light_1:
-  hidden: true
-automation.dim_bathroom_lights_when_its_late:
-  hidden: true
-media_player.living_room_chromecast:
-  hidden: true
 switch.kitchen_units:
   icon: mdi:led-strip
 switch.conservatory:

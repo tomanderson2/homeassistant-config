@@ -9,13 +9,16 @@ boost_heating:
     - service: climate.set_aux_heat
       data:
         entity_id: climate.heating
-        state: "on"
-    - service: light.turn_on
-      data:
-        entity_id: light.kitchen
+        aux_heat: true
     - service: tts.google_say
       entity_id: group.google_homes
       data_template:
-        message: "Boosting the heating for 30 minutes"
+        message: "Boosting the heating for 1 hour"
     - service: input_boolean.turn_off
       entity_id: input_boolean.heating
+    - delay: 00:30:02
+    - service: climate.set_aux_heat
+      data:
+        entity_id: climate.heating
+        aux_heat: true
+

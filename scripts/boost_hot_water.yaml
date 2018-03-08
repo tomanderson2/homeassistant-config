@@ -9,7 +9,7 @@ boost_hot_water:
     - service: climate.set_aux_heat
       data:
         entity_id: climate.hot_water
-        state: 'on'
+        aux_heat: true
     - service: tts.google_say
       entity_id: group.google_homes
       data_template:

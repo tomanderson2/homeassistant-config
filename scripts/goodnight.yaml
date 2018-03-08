@@ -11,7 +11,7 @@ goodnight:
       data:
         entity_id: 
           - group.kitchen_lights
-          - group.computer
+          - group.the_computer
           - switch.conservatory
     - service: media_player.turn_off
       entity_id:
@@ -28,7 +28,6 @@ goodnight:
         entity_id: 
           - group.front_room_lights
           - switch.cupboard_lights
-          - switch.christmas_tree
     - delay: 00:00:30
     - service: homeassistant.turn_off
       data:

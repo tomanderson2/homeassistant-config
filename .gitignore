@@ -23,6 +23,7 @@ custom_components
 secrets.yaml
 known_devices.yaml
 ip_bans.yaml
+entity_registry.yaml
 html5_push_registrations.conf
 home-assistant.log
 home-assistant_v2.db
@@ -30,3 +31,5 @@ home-assistant_v2.db
 webostv.conf
 .uuid
 .HA_VERSION
+.google_maps_location_sharing.cookies
+

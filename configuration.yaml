@@ -8,28 +8,12 @@ homeassistant:
   customize: !include customize.yaml
 
 camera:
-  - platform: ffmpeg
+  - platform: generic
     name: Conservatory Camera
-    input: !secret con_cam_stream
-  - platform: yi
+    still_image_url: !secret con_cam_jpg
+  - platform: generic
     name: Driveway Camera
-    host: !secret ip_yi_driveway
-    password: !secret yi_password
-  - platform: generic
-    name: tom
-    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.hassio_tomphone.attributes.latitude }},{{ states.device_tracker.hassio_tomphone.attributes.longitude }}&zoom=16&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.device_tracker.hassio_tomphone.attributes.latitude }},{{ states.device_tracker.hassio_tomphone.attributes.longitude }}
-    limit_refetch_to_url_change: true
-  - platform: generic
-    name: hannah
-    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.hannah_gs7.attributes.latitude }},{{ states.device_tracker.hannah_gs7.attributes.longitude }}&zoom=16&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.device_tracker.hannah_gs7.attributes.latitude }},{{ states.device_tracker.hannah_gs7.attributes.longitude }}
-    limit_refetch_to_url_change: true
-#android_ip_webcam:
-#  - host: !secret android_cam
-#    name: Driveway Camera
-#    port: 8080
-#    switches:
-#    - ffc
-#    - night_vision
+    still_image_url: !secret driveway_cam_jpg
 
 climate:
   platform: hive
@@ -42,9 +26,9 @@ device_tracker:
     interval_seconds: 30
     consider_home: 180
     track_new_devices: no
-  - platform: owntracks
-    max_gps_accuracy: 200
-    waypoints: True
+  - platform: google_maps
+    username: !secret gmaps_user
+    password: !secret gmaps_password
 
 discovery:
 
@@ -101,13 +85,6 @@ input_number:
     min: 0
     max: 100
     step: 1
-    
-  home_cinema_main:
-    name: Cinema Volume
-    initial: 40
-    min: 0
-    max: 100
-    step: 1
 
 light:
   platform: rfxtrx
@@ -158,18 +135,21 @@ media_player:
   - platform: kodi
     host: !secret ip_kodi
 
-mqtt:
-  broker: localhost
-  port: !secret mqtt_port
-  username: !secret mqtt_user
-  password: !secret mqtt_password
-  keepalive: 60
+#mqtt:
+#  broker: localhost
+#  port: !secret mqtt_port
+#  username: !secret mqtt_user
+#  password: !secret mqtt_password
+#  keepalive: 60
 
 notify:
   - name: tom
     platform: html5
     gcm_api_key: !secret gcm_api_key
     gcm_sender_id: !secret gcm_sender_id
+
+recorder:
+  purge_keep_days: 5
 
 rfxtrx:
   device: /dev/ttyUSB0
@@ -189,15 +169,15 @@ scene:
 
 sensor:
   - platform: google_geocode
-    name: tom
-    origin: device_tracker.hassio_tomphone
+    name: Tom
+    origin: device_tracker.google_maps_100046933267056460447
     options: street_number, street, city
-    api_key: AIzaSyBW-6kd7kgFC5NmZ0pLAbg1Gjg2_2zkepg
+    api_key: !secret geo_api_key
   - platform: google_geocode
-    name: hannah
-    origin: device_tracker.hannah_gs7
+    name: Hannah
+    origin: device_tracker.google_maps_113448197674555557261
     options: street_number, street, city
-    api_key: AIzaSyBW-6kd7kgFC5NmZ0pLAbg1Gjg2_2zkepg
+    api_key: !secret geo_api_key
 
 sun:
 
@@ -302,6 +282,8 @@ tts:
 
 updater:
   include_used_components: true
+
+wake_on_lan:
 
 weather:
   - platform: openweathermap
